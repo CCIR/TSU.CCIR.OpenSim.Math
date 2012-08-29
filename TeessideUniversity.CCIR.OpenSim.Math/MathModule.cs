@@ -27,6 +27,7 @@
 
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 
 using log4net;
 using Nini.Config;
@@ -290,6 +291,48 @@ namespace TeessideUniversity.CCIR.OpenSim
         }
 
         #endregion
+
+        /// <summary>
+        /// Returns a Fibonacci sequence from point n of the specified length
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="script"></param>
+        /// <param name="n"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Since we're dealing with arbitrary sections of the Fibonacci 
+        /// sequence, we want to use Binet's formula to aid speed of execution.
+        /// http://en.wikipedia.org/wiki/Binet%27s_formula
+        /// </remarks>
+        public object[] osMathFibonacci(UUID host, UUID script, int n, int length)
+        {
+            List<int> resp = new List<int>();
+
+            int a = -1;
+            int b = 1;
+            int c;
+
+            if (n != 0)
+            {
+                a = (int)Math.Round((Math.Pow(PHI, n - 2) - Math.Pow(PSI, n - 2)) / sqrt5);
+                b = (int)Math.Round((Math.Pow(PHI, n - 1) - Math.Pow(PSI, n - 1)) / sqrt5);
+            }
+
+            int j = Math.Max(1, length);
+            for (int i = 0; i < j; ++i)
+            {
+                c = a;
+                a = b;
+                b = c + a;
+                resp.Add(b);
+            }
+
+            return resp.ConvertAll<object>(x =>
+            {
+                return (object)x;
+            }).ToArray();
+        }
 
         #endregion
     }

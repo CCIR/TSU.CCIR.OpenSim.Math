@@ -16,5 +16,7 @@ default
             "osMathVecCeil:" + (string)osMathVecCeil(<0.25, 0.5, 0.75>),
 			"osMathVecVolume: " + (string)osMathVecVolume(llGetScale())
         ], "\n"));
+
+        llOwnerSay(llList2CSV(osMathFibonacci(-10, 20)));
     }
 }
