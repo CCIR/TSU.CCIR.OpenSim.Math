@@ -116,17 +116,22 @@ namespace TeessideUniversity.CCIR.OpenSim
 
             double PHI = (1 + Math.Sqrt(5)) / 2.0;
             m_scriptModuleComms.RegisterConstant("OS_MATH_PHI", (float)PHI);
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_PHI", (float)(PHI * 2.0));
-            m_scriptModuleComms.RegisterConstant("OS_MATH_PHI_BY_TWO", (float)(PHI / 2.0));
+            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_PHI",
+                    (float)(PHI * 2.0));
+            m_scriptModuleComms.RegisterConstant("OS_MATH_PHI_BY_TWO",
+                    (float)(PHI / 2.0));
 
             #endregion
 
             // Defined as the ratio of a circle's circumference to its radius
             #region TAU
 
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU", (float)(Math.PI * 2.0));
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_TAU", (float)(Math.PI * 4.0));
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU_BY_TWO", (float)Math.PI);
+            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU",
+                    (float)(Math.PI * 2.0));
+            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_TAU",
+                    (float)(Math.PI * 4.0));
+            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU_BY_TWO",
+                    (float)Math.PI);
 
             #endregion
 
@@ -204,7 +209,8 @@ namespace TeessideUniversity.CCIR.OpenSim
         public Vector3 osMathVecFloor(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
-                    (float)Math.Floor(a.X), (float)Math.Floor(a.Y), (float)Math.Floor(a.Z));
+                    (float)Math.Floor(a.X), (float)Math.Floor(a.Y),
+                    (float)Math.Floor(a.Z));
         }
 
         /// <summary>
@@ -215,7 +221,8 @@ namespace TeessideUniversity.CCIR.OpenSim
         public Vector3 osMathVecRound(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
-                    (float)Math.Round(a.X), (float)Math.Round(a.Y), (float)Math.Round(a.Z));
+                    (float)Math.Round(a.X), (float)Math.Round(a.Y),
+                    (float)Math.Round(a.Z));
         }
 
         /// <summary>
@@ -226,7 +233,8 @@ namespace TeessideUniversity.CCIR.OpenSim
         public Vector3 osMathVecCeil(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
-                    (float)Math.Ceiling(a.X), (float)Math.Ceiling(a.Y), (float)Math.Ceiling(a.Z));
+                    (float)Math.Ceiling(a.X), (float)Math.Ceiling(a.Y),
+                    (float)Math.Ceiling(a.Z));
         }
 
         /// <summary>
