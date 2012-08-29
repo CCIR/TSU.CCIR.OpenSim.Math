@@ -114,7 +114,6 @@ namespace TeessideUniversity.CCIR.OpenSim
             // Fibonacci sequence in plants http://youtu.be/ahXIMUkSXX0
             #region PHI
 
-            double PHI = (1 + Math.Sqrt(5)) / 2.0;
             m_scriptModuleComms.RegisterConstant("OS_MATH_PHI", (float)PHI);
             m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_PHI",
                     (float)(PHI * 2.0));
@@ -160,6 +159,16 @@ namespace TeessideUniversity.CCIR.OpenSim
         #endregion
 
         #region OSSL
+
+        #region constants
+
+        private static readonly double sqrt5 = Math.Sqrt(5);
+
+        private static readonly double PHI = (1 + Math.Sqrt(5)) / 2.0;
+
+        private static readonly double PSI = -1 / ((1 + Math.Sqrt(5)) / 2.0);
+
+        #endregion
 
         #region Vectors
 
