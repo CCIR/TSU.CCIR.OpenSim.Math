@@ -115,18 +115,18 @@ namespace TeessideUniversity.CCIR.OpenSim
             #region PHI
 
             double PHI = (1 + Math.Sqrt(5)) / 2.0;
-            m_scriptModuleComms.RegisterConstant("OS_MATH_PHI", PHI);
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_PHI", PHI * 2.0);
-            m_scriptModuleComms.RegisterConstant("OS_MATH_PHI_BY_TWO", PHI / 2.0);
+            m_scriptModuleComms.RegisterConstant("OS_MATH_PHI", (float)PHI);
+            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_PHI", (float)(PHI * 2.0));
+            m_scriptModuleComms.RegisterConstant("OS_MATH_PHI_BY_TWO", (float)(PHI / 2.0));
 
             #endregion
 
             // Defined as the ratio of a circle's circumference to its radius
             #region TAU
 
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU", Math.PI * 2.0);
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_TAU", Math.PI * 4.0);
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU_BY_TWO", Math.PI);
+            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU", (float)(Math.PI * 2.0));
+            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_TAU", (float)(Math.PI * 4.0));
+            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU_BY_TWO", (float)Math.PI);
 
             #endregion
 
@@ -163,7 +163,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns>a * b</returns>
-        public Vector3d osMathVecMultiply(UUID host, UUID script, Vector3d a, Vector3d b)
+        public Vector3 osMathVecMultiply(UUID host, UUID script, Vector3 a, Vector3 b)
         {
             return a * b;
         }
@@ -180,17 +180,17 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// we want zero in those cases because LSL does not have constants for
         /// NaN or Infinity.
         /// </remarks>
-        public Vector3d osMathVecDivide(UUID host, UUID script, Vector3d a, Vector3d b)
+        public Vector3 osMathVecDivide(UUID host, UUID script, Vector3 a, Vector3 b)
         {
-            Vector3d c = a / b;
+            Vector3 c = a / b;
 
-            if (double.IsNaN(c.X) || double.IsInfinity(c.X))
+            if (float.IsNaN(c.X) || float.IsInfinity(c.X))
                 c.X = 0;
 
-            if (double.IsNaN(c.Y) || double.IsInfinity(c.Y))
+            if (float.IsNaN(c.Y) || float.IsInfinity(c.Y))
                 c.Y = 0;
 
-            if (double.IsNaN(c.Z) || double.IsInfinity(c.Z))
+            if (float.IsNaN(c.Z) || float.IsInfinity(c.Z))
                 c.Z = 0;
 
             return c;
@@ -201,10 +201,10 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public Vector3d osMathVecFloor(UUID host, UUID script, Vector3d a)
+        public Vector3 osMathVecFloor(UUID host, UUID script, Vector3 a)
         {
-            return new Vector3d(
-                    Math.Floor(a.X), Math.Floor(a.Y), Math.Floor(a.Z));
+            return new Vector3(
+                    (float)Math.Floor(a.X), (float)Math.Floor(a.Y), (float)Math.Floor(a.Z));
         }
 
         /// <summary>
@@ -212,10 +212,10 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public Vector3d osMathVecRound(UUID host, UUID script, Vector3d a)
+        public Vector3 osMathVecRound(UUID host, UUID script, Vector3 a)
         {
-            return new Vector3d(
-                    Math.Round(a.X), Math.Round(a.Y), Math.Round(a.Z));
+            return new Vector3(
+                    (float)Math.Round(a.X), (float)Math.Round(a.Y), (float)Math.Round(a.Z));
         }
 
         /// <summary>
@@ -223,10 +223,10 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public Vector3d osMathVecCeil(UUID host, UUID script, Vector3d a)
+        public Vector3 osMathVecCeil(UUID host, UUID script, Vector3 a)
         {
-            return new Vector3d(
-                    Math.Ceiling(a.X), Math.Ceiling(a.Y), Math.Ceiling(a.Z));
+            return new Vector3(
+                    (float)Math.Ceiling(a.X), (float)Math.Ceiling(a.Y), (float)Math.Ceiling(a.Z));
         }
 
         /// <summary>
@@ -237,9 +237,9 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public Vector3d osMathVecMin(UUID host, UUID script, Vector3d a, double b)
+        public Vector3 osMathVecMin(UUID host, UUID script, Vector3 a, float b)
         {
-            return new Vector3d(
+            return new Vector3(
                     Math.Min(b, a.X), Math.Min(b, a.Y), Math.Min(b, a.Z));
         }
 
@@ -251,9 +251,9 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public Vector3d osMathVecMax(UUID host, UUID script, Vector3d a, double b)
+        public Vector3 osMathVecMax(UUID host, UUID script, Vector3 a, float b)
         {
-            return new Vector3d(
+            return new Vector3(
                     Math.Max(b, a.X), Math.Max(b, a.Y), Math.Max(b, a.Z));
         }
 
