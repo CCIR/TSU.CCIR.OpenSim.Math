@@ -161,6 +161,8 @@ namespace TeessideUniversity.CCIR.OpenSim
 
         #region OSSL
 
+        #region Vectors
+
         /// <summary>
         /// Multiplies one vector by another via libOMV to compensate for the
         /// lack of LSL syntax for multiplying two vectors.
@@ -264,6 +266,8 @@ namespace TeessideUniversity.CCIR.OpenSim
             return new Vector3(
                     Math.Max(b, a.X), Math.Max(b, a.Y), Math.Max(b, a.Z));
         }
+
+        #endregion
 
         #endregion
     }
