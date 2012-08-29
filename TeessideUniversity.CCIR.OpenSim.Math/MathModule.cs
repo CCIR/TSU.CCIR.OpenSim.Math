@@ -202,7 +202,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         public Vector3d osMathVecFloor(UUID host, UUID script, Vector3d a)
         {
             return new Vector3d(
-                Math.Floor(a.X), Math.Floor(a.Y), Math.Floor(a.Z));
+                    Math.Floor(a.X), Math.Floor(a.Y), Math.Floor(a.Z));
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         public Vector3d osMathVecRound(UUID host, UUID script, Vector3d a)
         {
             return new Vector3d(
-                Math.Round(a.X), Math.Round(a.Y), Math.Round(a.Z));
+                    Math.Round(a.X), Math.Round(a.Y), Math.Round(a.Z));
         }
 
         /// <summary>
