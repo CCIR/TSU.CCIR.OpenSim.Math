@@ -132,7 +132,7 @@ namespace TeessideUniversity.CCIR.OpenSim
 
             #endregion
 
-            m_scriptModuleComms.RegisterScriptInvocation(this, new string[5]{
+            m_scriptModuleComms.RegisterScriptInvocation(this, new string[]{
                 "osMathVecMultiply",
                 "osMathVecDivide",
                 "osMathVecFloor",
