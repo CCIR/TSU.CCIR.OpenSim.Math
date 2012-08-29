@@ -13,7 +13,8 @@ default
             "osMathVecDivide: " + (string)osMathVecDivide(<1,2,3>, <4,5,6>),
             "osMathVecFloor:" + (string)osMathVecFloor(<0.25, 0.5, 0.75>),
             "osMathVecRound:" + (string)osMathVecRound(<0.25, 0.5, 0.75>),
-            "osMathVecCeil:" + (string)osMathVecCeil(<0.25, 0.5, 0.75>)
+            "osMathVecCeil:" + (string)osMathVecCeil(<0.25, 0.5, 0.75>),
+			"osMathVecVolume: " + (string)osMathVecVolume(llGetScale())
         ], "\n"));
     }
 }

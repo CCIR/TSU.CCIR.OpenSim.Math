@@ -143,7 +143,8 @@ namespace TeessideUniversity.CCIR.OpenSim
                 "osMathVecRound",
                 "osMathVecCeil",
                 "osMathVecMin",
-                "osMathVecMax"
+                "osMathVecMax",
+                "osMathVecVolume"
             });
         }
 
@@ -274,6 +275,18 @@ namespace TeessideUniversity.CCIR.OpenSim
         {
             return new Vector3(
                     Math.Max(b, a.X), Math.Max(b, a.Y), Math.Max(b, a.Z));
+        }
+
+        /// <summary>
+        /// Assumes the vector is the dimensions of a box and calculates it's volume
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="script"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public float osMathVecVolume(UUID host, UUID script, Vector3 a)
+        {
+            return a.X * a.Y * a.Z;
         }
 
         #endregion
