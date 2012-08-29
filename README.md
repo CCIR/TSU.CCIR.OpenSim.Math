@@ -1,10 +1,15 @@
 # Configuration
 
 To enable the module, place the following into OpenSim.ini:
-
 ```ini
 [MathModule]
 Enabled = true
+```
+
+Then go to the XEngine section and enable mod functions
+```ini
+[XEngine]
+AllowMODFunctions = true
 ```
 
 # Support
