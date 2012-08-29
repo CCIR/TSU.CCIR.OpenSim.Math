@@ -137,7 +137,9 @@ namespace TeessideUniversity.CCIR.OpenSim
                 "osMathVecDivide",
                 "osMathVecFloor",
                 "osMathVecRound",
-                "osMathVecCeil"
+                "osMathVecCeil",
+                "osMathVecMin",
+                "osMathVecMax"
             });
         }
 
@@ -225,6 +227,34 @@ namespace TeessideUniversity.CCIR.OpenSim
         {
             return new Vector3d(
                     Math.Ceiling(a.X), Math.Ceiling(a.Y), Math.Ceiling(a.Z));
+        }
+
+        /// <summary>
+        /// Ensures that all axis in vector a are no larger than b
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="script"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public Vector3d osMathVecMin(UUID host, UUID script, Vector3d a, double b)
+        {
+            return new Vector3d(
+                    Math.Min(b, a.X), Math.Min(b, a.Y), Math.Min(b, a.Z));
+        }
+
+        /// <summary>
+        /// Ensures that all axis in vector a are no smaller than b
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="script"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public Vector3d osMathVecMax(UUID host, UUID script, Vector3d a, double b)
+        {
+            return new Vector3d(
+                    Math.Max(b, a.X), Math.Max(b, a.Y), Math.Max(b, a.Z));
         }
 
         #endregion
