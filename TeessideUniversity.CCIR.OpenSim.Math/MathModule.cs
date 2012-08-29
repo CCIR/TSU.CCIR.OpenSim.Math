@@ -224,7 +224,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         public Vector3d osMathVecCeil(UUID host, UUID script, Vector3d a)
         {
             return new Vector3d(
-                Math.Ceiling(a.X), Math.Ceiling(a.Y), Math.Ceiling(a.Z));
+                    Math.Ceiling(a.X), Math.Ceiling(a.Y), Math.Ceiling(a.Z));
         }
 
         #endregion
