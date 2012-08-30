@@ -163,7 +163,7 @@ namespace TeessideUniversity.CCIR.OpenSim
 
         #region OSSL
 
-        #region constants
+        #region Constants
 
         private static readonly double sqrt5 = Math.Sqrt(5);
 
