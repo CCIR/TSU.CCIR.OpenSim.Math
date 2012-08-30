@@ -115,10 +115,10 @@ namespace TeessideUniversity.CCIR.OpenSim
             // Fibonacci sequence in plants http://youtu.be/ahXIMUkSXX0
             #region PHI
 
-            m_scriptModuleComms.RegisterConstant("OS_MATH_PHI", (float)PHI);
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_PHI",
+            m_scriptModuleComms.RegisterConstant("MATH_PHI", (float)PHI);
+            m_scriptModuleComms.RegisterConstant("MATH_TWO_PHI",
                     (float)(PHI * 2.0));
-            m_scriptModuleComms.RegisterConstant("OS_MATH_PHI_BY_TWO",
+            m_scriptModuleComms.RegisterConstant("MATH_PHI_BY_TWO",
                     (float)(PHI / 2.0));
 
             #endregion
@@ -126,11 +126,11 @@ namespace TeessideUniversity.CCIR.OpenSim
             // Defined as the ratio of a circle's circumference to its radius
             #region TAU
 
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU",
+            m_scriptModuleComms.RegisterConstant("MATH_TAU",
                     (float)(Math.PI * 2.0));
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TWO_TAU",
+            m_scriptModuleComms.RegisterConstant("MATH_TWO_TAU",
                     (float)(Math.PI * 4.0));
-            m_scriptModuleComms.RegisterConstant("OS_MATH_TAU_BY_TWO",
+            m_scriptModuleComms.RegisterConstant("MATH_TAU_BY_TWO",
                     (float)Math.PI);
 
             #endregion
@@ -138,14 +138,15 @@ namespace TeessideUniversity.CCIR.OpenSim
             #endregion
 
             m_scriptModuleComms.RegisterScriptInvocation(this, new string[]{
-                "osMathVecMultiply",
-                "osMathVecDivide",
-                "osMathVecFloor",
-                "osMathVecRound",
-                "osMathVecCeil",
-                "osMathVecMin",
-                "osMathVecMax",
-                "osMathVecVolume"
+                "mathVecMultiply",
+                "mathVecDivide",
+                "mathVecFloor",
+                "mathVecRound",
+                "mathVecCeil",
+                "mathVecMin",
+                "mathVecMax",
+                "mathVecVolume",
+                "mathFibonacci"
             });
         }
 
@@ -181,7 +182,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns>a * b</returns>
-        public Vector3 osMathVecMultiply(UUID host, UUID script, Vector3 a, Vector3 b)
+        public Vector3 mathVecMultiply(UUID host, UUID script, Vector3 a, Vector3 b)
         {
             return a * b;
         }
@@ -198,7 +199,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// we want zero in those cases because LSL does not have constants for
         /// NaN or Infinity.
         /// </remarks>
-        public Vector3 osMathVecDivide(UUID host, UUID script, Vector3 a, Vector3 b)
+        public Vector3 mathVecDivide(UUID host, UUID script, Vector3 a, Vector3 b)
         {
             Vector3 c = a / b;
 
@@ -219,7 +220,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public Vector3 osMathVecFloor(UUID host, UUID script, Vector3 a)
+        public Vector3 mathVecFloor(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
                     (float)Math.Floor(a.X), (float)Math.Floor(a.Y),
@@ -231,7 +232,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public Vector3 osMathVecRound(UUID host, UUID script, Vector3 a)
+        public Vector3 mathVecRound(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
                     (float)Math.Round(a.X), (float)Math.Round(a.Y),
@@ -243,7 +244,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public Vector3 osMathVecCeil(UUID host, UUID script, Vector3 a)
+        public Vector3 mathVecCeil(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
                     (float)Math.Ceiling(a.X), (float)Math.Ceiling(a.Y),
@@ -258,7 +259,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public Vector3 osMathVecMin(UUID host, UUID script, Vector3 a, float b)
+        public Vector3 mathVecMin(UUID host, UUID script, Vector3 a, float b)
         {
             return new Vector3(
                     Math.Min(b, a.X), Math.Min(b, a.Y), Math.Min(b, a.Z));
@@ -272,7 +273,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public Vector3 osMathVecMax(UUID host, UUID script, Vector3 a, float b)
+        public Vector3 mathVecMax(UUID host, UUID script, Vector3 a, float b)
         {
             return new Vector3(
                     Math.Max(b, a.X), Math.Max(b, a.Y), Math.Max(b, a.Z));
@@ -285,7 +286,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="script"></param>
         /// <param name="a"></param>
         /// <returns></returns>
-        public float osMathVecVolume(UUID host, UUID script, Vector3 a)
+        public float mathVecVolume(UUID host, UUID script, Vector3 a)
         {
             return a.X * a.Y * a.Z;
         }
@@ -305,7 +306,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// sequence, we want to use Binet's formula to aid speed of execution.
         /// http://en.wikipedia.org/wiki/Binet%27s_formula
         /// </remarks>
-        public object[] osMathFibonacci(UUID host, UUID script, int n, int length)
+        public object[] mathFibonacci(UUID host, UUID script, int n, int length)
         {
             List<int> resp = new List<int>();
 
