@@ -137,17 +137,18 @@ namespace TeessideUniversity.CCIR.OpenSim
 
             #endregion
 
-            m_scriptModuleComms.RegisterScriptInvocation(GetType(), new string[]{
-                "mathVecMultiply",
-                "mathVecDivide",
-                "mathVecFloor",
-                "mathVecRound",
-                "mathVecCeil",
-                "mathVecMin",
-                "mathVecMax",
-                "mathVecVolume",
-                "mathFibonacci"
-            });
+            Dictionary<string, string> funcs = new Dictionary<string,string>();
+            funcs["mathVecMultiply"] = "MultiplyVector3";
+            funcs["mathVecDivide"] = "DivideVector3";
+            funcs["mathVecFloor"] = "FloorVector3";
+            funcs["mathVecRound"] = "RoundVector3";
+            funcs["mathVecCeil"] = "CeilingVector3";
+            funcs["mathVecMin"] = "MinVector3";
+            funcs["mathVecMax"] = "MaxVector3";
+            funcs["mathVecVolume"] = "VolumeOfVector3";
+            funcs["mathFibonacci"] = "BinetFibonacciSequenceSegment";
+
+            m_scriptModuleComms.RegisterScriptInvocation(GetType(), funcs);
         }
 
         public void Close()
@@ -182,7 +183,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns>a * b</returns>
-        public static Vector3 mathVecMultiply(UUID host, UUID script, Vector3 a, Vector3 b)
+        public static Vector3 MultiplyVector3(UUID host, UUID script, Vector3 a, Vector3 b)
         {
             return a * b;
         }
@@ -199,7 +200,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// we want zero in those cases because LSL does not have constants for
         /// NaN or Infinity.
         /// </remarks>
-        public static Vector3 mathVecDivide(UUID host, UUID script, Vector3 a, Vector3 b)
+        public static Vector3 DivideVector3(UUID host, UUID script, Vector3 a, Vector3 b)
         {
             Vector3 c = a / b;
 
@@ -220,7 +221,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static Vector3 mathVecFloor(UUID host, UUID script, Vector3 a)
+        public static Vector3 FloorVector3(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
                     (float)Math.Floor(a.X), (float)Math.Floor(a.Y),
@@ -232,7 +233,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static Vector3 mathVecRound(UUID host, UUID script, Vector3 a)
+        public static Vector3 RoundVector3(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
                     (float)Math.Round(a.X), (float)Math.Round(a.Y),
@@ -244,7 +245,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static Vector3 mathVecCeil(UUID host, UUID script, Vector3 a)
+        public static Vector3 CeilingVector3(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
                     (float)Math.Ceiling(a.X), (float)Math.Ceiling(a.Y),
@@ -259,7 +260,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Vector3 mathVecMin(UUID host, UUID script, Vector3 a, float b)
+        public static Vector3 MinVector3(UUID host, UUID script, Vector3 a, float b)
         {
             return new Vector3(
                     Math.Min(b, a.X), Math.Min(b, a.Y), Math.Min(b, a.Z));
@@ -273,7 +274,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Vector3 mathVecMax(UUID host, UUID script, Vector3 a, float b)
+        public static Vector3 MaxVector3(UUID host, UUID script, Vector3 a, float b)
         {
             return new Vector3(
                     Math.Max(b, a.X), Math.Max(b, a.Y), Math.Max(b, a.Z));
@@ -286,7 +287,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="script"></param>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static float mathVecVolume(UUID host, UUID script, Vector3 a)
+        public static float VolumeOfVector3(UUID host, UUID script, Vector3 a)
         {
             return a.X * a.Y * a.Z;
         }
@@ -306,7 +307,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// sequence, we want to use Binet's formula to aid speed of execution.
         /// http://en.wikipedia.org/wiki/Binet%27s_formula
         /// </remarks>
-        public static object[] mathFibonacci(UUID host, UUID script, int n, int length)
+        public static object[] BinetFibonacciSequenceSegment(UUID host, UUID script, int n, int length)
         {
             List<int> resp = new List<int>();
 
