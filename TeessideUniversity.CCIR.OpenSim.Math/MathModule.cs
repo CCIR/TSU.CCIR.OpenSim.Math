@@ -49,12 +49,12 @@ using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
 using LSL_Vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
 
 [assembly: Addin("MathModule", "0.1")]
-[assembly: AddinDependency("OpenSim", "0.7.4")]
+[assembly: AddinDependency("OpenSim", "0.5")]
 
 namespace TeessideUniversity.CCIR.OpenSim
 {
     [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "MathModule")]
-    class MathModule : INonSharedRegionModule
+    public class MathModule : INonSharedRegionModule
     {
 
         #region logging
@@ -108,46 +108,15 @@ namespace TeessideUniversity.CCIR.OpenSim
 
             #region Constants
 
-            // Defined as the "Golden Ratio", useful for plant life generation,
-            // also for calculating fibonacci numbers via Binet's formula
-            // http://en.wikipedia.org/wiki/Golden_ratio
-            // http://en.wikipedia.org/wiki/Fibonacci_number#Relation_to_the_golden_ratio
-            // Fibonacci sequence in plants http://youtu.be/ahXIMUkSXX0
-            #region PHI
-
-            m_scriptModuleComms.RegisterConstant("MATH_PHI", (float)PHI);
             m_scriptModuleComms.RegisterConstant("MATH_TWO_PHI",
-                    (float)(PHI * 2.0));
+                    (float)(MATH_PHI * 2.0));
             m_scriptModuleComms.RegisterConstant("MATH_PHI_BY_TWO",
-                    (float)(PHI / 2.0));
+                    (float)(MATH_PHI / 2.0));
 
             #endregion
 
-            // Defined as the ratio of a circle's circumference to its radius
-            #region TAU
-
-            m_scriptModuleComms.RegisterConstant("MATH_TAU",
-                    (float)(Math.PI * 2.0));
-            m_scriptModuleComms.RegisterConstant("MATH_TWO_TAU",
-                    (float)(Math.PI * 4.0));
-            m_scriptModuleComms.RegisterConstant("MATH_TAU_BY_TWO",
-                    (float)Math.PI);
-
-            #endregion
-
-            #endregion
-
-            m_scriptModuleComms.RegisterScriptInvocation(GetType(), new string[]{
-                "mathVecMultiply",
-                "mathVecDivide",
-                "mathVecFloor",
-                "mathVecRound",
-                "mathVecCeil",
-                "mathVecMin",
-                "mathVecMax",
-                "mathVecVolume",
-                "mathFibonacci"
-            });
+            m_scriptModuleComms.RegisterScriptInvocations(this);
+            m_scriptModuleComms.RegisterConstants(this);
         }
 
         public void Close()
@@ -167,9 +136,27 @@ namespace TeessideUniversity.CCIR.OpenSim
 
         private static readonly double sqrt5 = Math.Sqrt(5);
 
-        private static readonly double PHI = (1 + Math.Sqrt(5)) / 2.0;
+        /// <summary>
+        /// Defined as the "Golden Ratio", useful for plant life generation,
+        /// also for calculating fibonacci numbers via Binet's formula
+        /// http://en.wikipedia.org/wiki/Golden_ratio
+        /// http://en.wikipedia.org/wiki/Fibonacci_number#Relation_to_the_golden_ratio
+        /// Fibonacci sequence in plants http://youtu.be/ahXIMUkSXX0
+        /// </summary>
+        [ScriptConstant]
+        public static readonly float MATH_PHI = (float)((1 + Math.Sqrt(5)) / 2.0);
 
-        private static readonly double PSI = -1 / ((1 + Math.Sqrt(5)) / 2.0);
+        [ScriptConstant]
+        public static readonly float MATH_PSI = (float)(-1 / ((1 + Math.Sqrt(5)) / 2.0));
+
+        [ScriptConstant]
+        public static readonly float MATH_TAU = (float)(Math.PI * 2.0);
+
+        [ScriptConstant]
+        public static readonly float MATH_TWO_TAU = (float)(Math.PI * 4.0);
+
+        [ScriptConstant]
+        public static readonly float MATH_TAU_BY_TWO = (float)(Math.PI);
 
         #endregion
 
@@ -182,6 +169,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns>a * b</returns>
+        [ScriptInvocation]
         public static Vector3 mathVecMultiply(UUID host, UUID script, Vector3 a, Vector3 b)
         {
             return a * b;
@@ -199,6 +187,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// we want zero in those cases because LSL does not have constants for
         /// NaN or Infinity.
         /// </remarks>
+        [ScriptInvocation]
         public static Vector3 mathVecDivide(UUID host, UUID script, Vector3 a, Vector3 b)
         {
             Vector3 c = a / b;
@@ -220,6 +209,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
+        [ScriptInvocation]
         public static Vector3 mathVecFloor(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
@@ -232,6 +222,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
+        [ScriptInvocation]
         public static Vector3 mathVecRound(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
@@ -244,6 +235,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
+        [ScriptInvocation]
         public static Vector3 mathVecCeil(UUID host, UUID script, Vector3 a)
         {
             return new Vector3(
@@ -259,6 +251,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
+        [ScriptInvocation]
         public static Vector3 mathVecMin(UUID host, UUID script, Vector3 a, float b)
         {
             return new Vector3(
@@ -273,6 +266,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
+        [ScriptInvocation]
         public static Vector3 mathVecMax(UUID host, UUID script, Vector3 a, float b)
         {
             return new Vector3(
@@ -286,6 +280,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// <param name="script"></param>
         /// <param name="a"></param>
         /// <returns></returns>
+        [ScriptInvocation]
         public static float mathVecVolume(UUID host, UUID script, Vector3 a)
         {
             return a.X * a.Y * a.Z;
@@ -306,6 +301,7 @@ namespace TeessideUniversity.CCIR.OpenSim
         /// sequence, we want to use Binet's formula to aid speed of execution.
         /// http://en.wikipedia.org/wiki/Binet%27s_formula
         /// </remarks>
+        [ScriptInvocation]
         public static object[] mathFibonacci(UUID host, UUID script, int n, int length)
         {
             List<int> resp = new List<int>();
@@ -316,8 +312,8 @@ namespace TeessideUniversity.CCIR.OpenSim
 
             if (n != 0)
             {
-                a = (int)Math.Round((Math.Pow(PHI, n - 2) - Math.Pow(PSI, n - 2)) / sqrt5);
-                b = (int)Math.Round((Math.Pow(PHI, n - 1) - Math.Pow(PSI, n - 1)) / sqrt5);
+                a = (int)Math.Round((Math.Pow(MATH_PHI, n - 2) - Math.Pow(MATH_PSI, n - 2)) / sqrt5);
+                b = (int)Math.Round((Math.Pow(MATH_PHI, n - 1) - Math.Pow(MATH_PSI, n - 1)) / sqrt5);
             }
 
             int j = Math.Max(1, length);
